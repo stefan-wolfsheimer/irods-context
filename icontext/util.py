@@ -1,4 +1,5 @@
 import re
+import os
 from os.path import expanduser
 from os.path import isdir
 from os.path import join
@@ -42,12 +43,59 @@ def get_config_dir(server=None, user=None):
         return join(ret, user)
 
 
-def get_config_file(server, user):
+def get_env_file(server, user):
+    "Get path to environment file for server and user"
     return join(get_config_dir(server, user), 'irods_environment.json')
 
 
 def get_auth_file(server, user):
     return join(get_config_dir(server, user), '.irodsA')
+
+
+def get_current_env_file():
+    """
+    Get path to currently used environment file
+    Return value of IRODS_ENVIRONMENT_FILE
+    """
+    return os.environ.get('IRODS_ENVIRONMENT_FILE',
+                          expanduser('~/.irods/irods_environment.json'))
+
+
+def get_current_auth_file():
+    """
+    Get path to currently used auth file
+    Return value of IRODS_ENVIRONMENT_FILE
+    """
+    return os.environ.get('IRODS_AUTHENTICATION_FILE',
+                          expanduser('~/.irods/.irodsA'))
+
+
+def update_env_file_variable():
+    env_file = expanduser('~/.irods/icontext.env')
+    with open(env_file, "w") as fp:
+        env_file_pattern = "export IRODS_ENVIRONMENT_FILE={0}\n"
+        auth_file_pattern = "export IRODS_AUTHENTICATION_FILE={0}\n"
+        fp.write(env_file_pattern.format(get_current_env_file()))
+        fp.write(auth_file_pattern.format(get_current_auth_file()))
+
+
+def get_current_server_and_user():
+    """
+    Get a tuple of currently used server and user
+    Return None if not configured"
+    """
+    pattern = re.compile('^' +
+                         re.escape(expanduser('~/.irods/icontext') + '/') +
+                         '(.*?)' +
+                         re.escape('/') +
+                         '(.*?)' +
+                         re.escape('/irods_environment.json') +
+                         '$')
+    m = pattern.match(get_current_env_file())
+    if m is None:
+        return (None, None)
+    else:
+        return (m.group(1), m.group(2))
 
 
 def string_starts_with(s, pattern):

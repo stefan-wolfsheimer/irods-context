@@ -2,7 +2,7 @@ import click
 import json
 from icontext.util import TEMPLATE_WITH_SSL
 from icontext.util import TEMPLATE_WITHOUT_SSL
-from icontext.util import get_config_file
+from icontext.util import get_env_file
 from icontext.util import input_value
 from icontext.util import complete_servers
 from icontext.util import complete_users
@@ -17,7 +17,7 @@ from icontext.util import complete_users
 @click.option('-s', '--with-ssl', default=False, is_flag=True)
 @click.option('-p', '--with-pam', default=False, is_flag=True)
 def configure(server, user, with_ssl, with_pam):
-    env_file = get_config_file(server, user)
+    env_file = get_env_file(server, user)
     with open(env_file) as fp:
         old_config = fp.read()
     try:

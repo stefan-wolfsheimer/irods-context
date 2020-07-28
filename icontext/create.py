@@ -4,7 +4,7 @@ from os import makedirs
 from getpass import getpass
 from icontext.util import complete_servers
 from icontext.util import complete_users_regex_server
-from icontext.util import get_config_file
+from icontext.util import get_env_file
 from icontext.util import get_auth_file
 from icontext.util import input_value
 from icontext.util import TEMPLATE_WITH_SSL
@@ -49,7 +49,7 @@ def create(server,
         cfg = TEMPLATE_WITH_SSL.format(**cfg_args)
     else:
         cfg = TEMPLATE_WITHOUT_SSL.format(**cfg_args)
-    env_file = get_config_file(server, user)
+    env_file = get_env_file(server, user)
     auth_file = get_auth_file(server, user)
     makedirs(dirname(env_file), exist_ok=True)
     with open(env_file, "w") as fp:

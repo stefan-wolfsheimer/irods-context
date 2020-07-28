@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
+from setuptools import setup, find_packages
 PROJECT = 'icontext'
 VERSION = '0.1'
-
-from setuptools import setup, find_packages
+DOWNLOAD_URL = 'https://github.com/stefan-wolfsheimer/icontext/tarball/master'
 
 try:
     long_description = open('README.rst', 'rt').read()
@@ -17,7 +17,7 @@ setup(name=PROJECT,
       author='Stefan Wolfsheimer',
       author_email='stefan.wolfsheimer@gmail.com',
       url='https://github.com/stefan-wolfsheimer/icontext',
-      download_url='https://github.com/stefan-wolfsheimer/icontext/tarball/master',
+      download_url=DOWNLOAD_URL,
       classifiers=['Development Status :: 3 - Alpha',
                    'License :: OSI Approved :: Apache Software License',
                    'Programming Language :: Python',
@@ -35,6 +35,7 @@ setup(name=PROJECT,
       namespace_packages=[],
       packages=find_packages(),
       include_package_data=True,
+      package_data={'icontext': ['*.sh']},
       entry_points={
           'console_scripts': [
               'icontext = icontext.main:main'

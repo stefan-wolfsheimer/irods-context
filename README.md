@@ -8,13 +8,30 @@ icontext ls
 icontext use <server>[:<user>]
 ```
 
+# switch to default context
+```
+icontext unuse
+```
+
+Note: this command will set
+
+```
+IRODS_ENVIRONMENT_FILE=~/.irods/irods_environment.json
+IRODS_AUTHENTICATION_FILE=~/.irods/.irodsA
+```
+
+# get server and user of current context
+```
+icontext which
+```
+
 # show configuration of (current) context
 ```
-incontext describe
+icontext describe
 ```
 
 ```
-incontext describe <server>[:<user>]
+icontext describe <server> <user>
 ```
 
 # edit / view notes of context
@@ -48,26 +65,46 @@ icontext create [OPTIONS] <server>
 
 ## interactive with server name and user name
 ```
-context create [OPTIONS] <server> <user>
+icontext create [OPTIONS] <server> <user>
 ```
 
 ## clone
+Clone a configuration. Use *icontext clone* to copy a configuration and then *icontext configure* to
+configure the cloned configuration.
 ```
-context clone [OPTIONS] <server> <user> <new_server> <new_user>
+icontext clone [OPTIONS] <server> <user> <new_server> <new_user>
 ```
 
 ## rename
 ```
-context rename <server> <user> <new_server> <new_user>
+icontext rename <server> <user> <new_server> <new_user>
 ```
 
 ## reconfigure
 ```
-context configure [OPTIONS] <server> <user>
+icontext configure [OPTIONS] <server> <user>
 ```
 
-## activate tab completion
-eval "$(_ICONTEXT_COMPLETE=source_bash icontext)"
+## activate tab completion and variable export
+
+### For Bash, add this to ~/.bashrc:
+
+```
+eval "$(_ICONTEXT_COMPLETE=source_bash foo-bar)"
+```
+
+
+### For Zsh, add this to ~/.zshrc:
+(not supported yet)
+```
+eval "$(_ICONTEXT_COMPLETE=source_zsh foo-bar)"
+```
+
+### For Fish, add this to ~/.config/fish/completions/foo-bar.fish:
+(not supported yet)
+```
+eval (env _ICONTEXT_COMPLETE=source_fish foo-bar)
+```
 
 ## reads
 * https://systemdump.io/posts/2017-05-06-openstack-cliff
