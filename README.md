@@ -78,6 +78,17 @@ icontext rename <server> <user> <new_server> <new_user>
 icontext configure [OPTIONS] <server> <user>
 ```
 
+or 
+
+```
+icontext edit [OPTIONS] <server> <user>
+```
+
+## delete
+```
+icontext delete [OPTIONS] <server> <user>
+```
+
 ## activate tab completion and variable export
 
 ### For Bash, add this to ~/.bashrc:
