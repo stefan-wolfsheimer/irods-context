@@ -9,13 +9,7 @@ from icontext.util import complete_users
 from icontext.util import update_env_file_variable
 
 
-@click.command()
-@click.argument("server",
-                type=click.STRING,
-                autocompletion=complete_servers)
-@click.argument("user",
-                type=click.STRING, autocompletion=complete_users)
-def use(server, user):
+def switch_context(server, user):
     os.environ['IRODS_ENVIRONMENT_FILE'] = get_env_file(server, user)
     os.environ['IRODS_AUTHENTICATION_FILE'] = get_auth_file(server, user)
     env_file = os.environ['IRODS_ENVIRONMENT_FILE']
@@ -33,3 +27,13 @@ def use(server, user):
         click.echo("type 'icontext create --help' for more", err=True)
         click.echo("type 'icontext clone --help' for more", err=True)
         return 8
+
+
+@click.command()
+@click.argument("server",
+                type=click.STRING,
+                autocompletion=complete_servers)
+@click.argument("user",
+                type=click.STRING, autocompletion=complete_users)
+def use(server, user):
+    return switch_context(server, user)
