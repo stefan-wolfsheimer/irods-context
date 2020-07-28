@@ -25,23 +25,16 @@ IRODS_AUTHENTICATION_FILE=~/.irods/.irodsA
 icontext which
 ```
 
-# show configuration of (current) context
+# show configuration
+
+## configuration of current context
 ```
 icontext describe
 ```
 
+## configuration for given server user
 ```
 icontext describe <server> <user>
-```
-
-# edit / view notes of context
-## server nodes
-```
-icontext note <server>
-```
-## user nodes
-```
-icontext note <server> <user>
 ```
 
 # create context
@@ -90,20 +83,20 @@ icontext configure [OPTIONS] <server> <user>
 ### For Bash, add this to ~/.bashrc:
 
 ```
-eval "$(_ICONTEXT_COMPLETE=source_bash foo-bar)"
+eval "$(_ICONTEXT_COMPLETE=source_bash icontext)"
 ```
 
 
 ### For Zsh, add this to ~/.zshrc:
 (not supported yet)
 ```
-eval "$(_ICONTEXT_COMPLETE=source_zsh foo-bar)"
+eval "$(_ICONTEXT_COMPLETE=source_zsh icontext)"
 ```
 
 ### For Fish, add this to ~/.config/fish/completions/foo-bar.fish:
 (not supported yet)
 ```
-eval (env _ICONTEXT_COMPLETE=source_fish foo-bar)
+eval (env _ICONTEXT_COMPLETE=source_fish icontext)
 ```
 
 ## reads
